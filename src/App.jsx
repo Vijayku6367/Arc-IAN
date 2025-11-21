@@ -42,8 +42,54 @@ function App() {
     }
   };
 
-  // Home Page Component
-  const HomePage = () => (
+// App.jsx mein HomePage component ko replace karo
+const HomePage = () => {
+  const [shadowAccounts, setShadowAccounts] = useState([
+    {
+      id: 'shadow-1',
+      address: '0x7a3b...c89d',
+      limit: '50 USDC',
+      status: 'Active',
+      created: '2 hours ago'
+    }
+  ]);
+  const [loading, setLoading] = useState(false);
+
+  // Create Shadow Account Function
+  const createShadowAccount = async () => {
+    setLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      const newAccount = {
+        id: `shadow-${Date.now()}`,
+        address: `0x${Math.random().toString(16).substr(2, 8)}...${Math.random().toString(16).substr(2, 4)}`,
+        limit: `${Math.floor(Math.random() * 100) + 10} USDC`,
+        status: 'Active',
+        created: 'Just now'
+      };
+      
+      setShadowAccounts(prev => [newAccount, ...prev]);
+      
+      alert(`🎉 Shadow Account Created!\n\n📍 Address: ${newAccount.address}\n💳 Limit: ${newAccount.limit}\n🔄 Status: ${newAccount.status}`);
+      
+    } catch (error) {
+      alert('❌ Failed to create account: ' + error.message);
+    }
+    setLoading(false);
+  };
+
+  // Send Transaction Function
+  const sendTransaction = async (accountId) => {
+    try {
+      alert(`🚀 Transaction Initiated!\n\nFrom: ${accountId}\nAmount: 0.1 ETH\n\nThis would be a gasless private transaction on Arc Network`);
+    } catch (error) {
+      alert('Transaction failed: ' + error.message);
+    }
+  };
+
+  return (
     <div className="home-page">
       <div className="hero-section">
         <div className="hero-content">
@@ -52,23 +98,78 @@ function App() {
             <span className="gradient-text"> Blockchain Experience</span>
           </h1>
           <p className="hero-subtitle">
-            Arc IAN brings you invisible accounts, gasless transactions, and complete privacy 
-            on the blockchain. Experience web3 like never before.
+            Create invisible accounts, send gasless transactions, and experience complete privacy 
+            on the blockchain with Arc IAN.
           </p>
           <div className="hero-actions">
             {!isConnected ? (
               <button className="cta-button primary" onClick={connectWallet}>
-                🚀 Get Started
+                🚀 Connect Wallet to Start
               </button>
             ) : (
-              <button className="cta-button success">
-                ✅ Connected: {account.slice(0, 8)}...
-              </button>
+              <div className="connected-actions">
+                <button 
+                  className="cta-button primary" 
+                  onClick={createShadowAccount}
+                  disabled={loading}
+                >
+                  {loading ? (
+                    <>
+                      <div className="spinner"></div>
+                      Creating...
+                    </>
+                  ) : (
+                    '🕵️ Create Shadow Account'
+                  )}
+                </button>
+                <button className="cta-button success">
+                  ✅ Connected: {account.slice(0, 8)}...
+                </button>
+              </div>
             )}
-            <button className="cta-button secondary">
+            <button className="cta-button secondary" onClick={() => setCurrentPage(PAGES.FEATURES)}>
               📖 Learn More
             </button>
           </div>
+
+          {/* Quick Actions Section - Only show when connected */}
+          {isConnected && (
+            <div className="quick-actions-section">
+              <h3>Quick Actions</h3>
+              <div className="quick-actions-grid">
+                <button 
+                  className="action-card"
+                  onClick={createShadowAccount}
+                  disabled={loading}
+                >
+                  <div className="action-icon">✨</div>
+                  <h4>Create Account</h4>
+                  <p>Generate new invisible account</p>
+                </button>
+                
+                <button 
+                  className="action-card"
+                  onClick={() => sendTransaction('shadow-account')}
+                >
+                  <div className="action-icon">💸</div>
+                  <h4>Send Transaction</h4>
+                  <p>Gasless private transfer</p>
+                </button>
+                
+                <button className="action-card">
+                  <div className="action-icon">👥</div>
+                  <h4>Create Circle</h4>
+                  <p>Shared spending group</p>
+                </button>
+                
+                <button className="action-card">
+                  <div className="action-icon">📊</div>
+                  <h4>View Analytics</h4>
+                  <p>Privacy metrics</p>
+                </button>
+              </div>
+            </div>
+          )}
         </div>
         <div className="hero-visual">
           <div className="floating-cards">
@@ -90,6 +191,59 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* Active Accounts Section - Only show when connected */}
+      {isConnected && shadowAccounts.length > 0 && (
+        <div className="accounts-section">
+          <div className="container">
+            <div className="section-header">
+              <h2>Your Shadow Accounts</h2>
+              <span className="account-count">{shadowAccounts.length} active</span>
+            </div>
+            
+            <div className="accounts-grid">
+              {shadowAccounts.map(account => (
+                <div key={account.id} className="account-card">
+                  <div className="account-header">
+                    <div className="account-info">
+                      <h4>{account.id}</h4>
+                      <span className={`status-badge ${account.status.toLowerCase()}`}>
+                        {account.status}
+                      </span>
+                    </div>
+                    <div className="account-meta">
+                      Created {account.created}
+                    </div>
+                  </div>
+                  
+                  <div className="account-details">
+                    <div className="detail-item">
+                      <span className="label">Address:</span>
+                      <span className="value">{account.address}</span>
+                    </div>
+                    <div className="detail-item">
+                      <span className="label">Spending Limit:</span>
+                      <span className="value highlight">{account.limit}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="account-actions">
+                    <button 
+                      className="btn-primary"
+                      onClick={() => sendTransaction(account.id)}
+                    >
+                      Send Transaction
+                    </button>
+                    <button className="btn-secondary">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="stats-section">
         <div className="container">
@@ -113,8 +267,37 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* Features Preview */}
+      <div className="features-preview">
+        <div className="container">
+          <div className="section-header">
+            <h2>Why Choose Arc IAN?</h2>
+            <p>Experience the future of private blockchain transactions</p>
+          </div>
+          
+          <div className="features-grid-mini">
+            <div className="feature-mini">
+              <div className="feature-icon">🔒</div>
+              <h4>Complete Anonymity</h4>
+              <p>No links between your main wallet and transactions</p>
+            </div>
+            <div className="feature-mini">
+              <div className="feature-icon">⚡</div>
+              <h4>Gasless Operations</h4>
+              <p>Zero gas fees with our sponsor network</p>
+            </div>
+            <div className="feature-mini">
+              <div className="feature-icon">🔄</div>
+              <h4>Auto-Rotation</h4>
+              <p>Accounts change automatically for maximum privacy</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
+};
 
   // Features Page Component
   const FeaturesPage = () => (
