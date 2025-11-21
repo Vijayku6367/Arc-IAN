@@ -1,4 +1,3 @@
-cat > src/constants.js << 'EOF'
 export const PAGES = {
   HOME: 'home',
   DOCS: 'docs', 
@@ -7,10 +6,10 @@ export const PAGES = {
 };
 
 export const NAV_ITEMS = [
-  { id: 'home', label: 'Home', icon: '🏠' },
-  { id: 'features', label: 'Features', icon: '⭐' },
-  { id: 'docs', label: 'Documentation', icon: '📚' },
-  { id: 'contact', label: 'Contact', icon: '📞' }
+  { id: 'home', label: 'Home', icon: '' },
+  { id: 'features', label: 'Features', icon: '' },
+  { id: 'docs', label: 'Documentation', icon: '' },
+  { id: 'contact', label: 'Contact', icon: '' }
 ];
 
 export const FEATURES = [
@@ -45,4 +44,3 @@ export const FEATURES = [
     description: 'Built with security and privacy as first principles'
   }
 ];
-EOF
