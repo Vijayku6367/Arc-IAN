@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arc IAN - Invisible Account Network</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .app {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .hero-section {
+            text-align: center;
+            max-width: 600px;
+        }
+        
+        .hero-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .feature {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem 1rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .feature span {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .feature h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .dashboard {
+            background: white;
+            color: #333;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        
+        .accounts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .account-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .hero-section h2 { font-size: 1.8rem; }
+            .features { grid-template-columns: 1fr; }
+            .main { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <h1>🕵️ Arc IAN</h1>
+            <p>Invisible Account Network - Privacy First, Gasless Transactions</p>
+        </header>
+
+        <main class="main">
+            <div class="hero-section">
+                <h2>Experience True Privacy on Blockchain</h2>
+                <p>Create temporary invisible accounts for completely private transactions on Arc Network</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <span>🔒</span>
+                        <h3>Private</h3>
+                        <p>No identity linking between transactions</p>
+                    </div>
+                    <div class="feature">
+                        <span>⚡</span>
+                        <h3>Gasless</h3>
+                        <p>Zero gas fees with sponsored transactions</p>
+                    </div>
+                    <div class="feature">
+                        <span>🔄</span>
+                        <h3>Rotating</h3>
+                        <p>Automatic account rotation for privacy</p>
+                    </div>
+                </div>
+
+                <button class="btn" onclick="showDemo()">🚀 Launch Demo</button>
+                <button class="btn btn-secondary" onclick="showFeatures()">📋 Features</button>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Built on Arc Protocol • Testnet Ready • Privacy by Design</p>
+        </footer>
+    </div>
+
+    <script>
+        function showDemo() {
+            const demoHTML = `
+                <div class="dashboard">
+                    <h2>🎯 Demo Dashboard</h2>
+                    <p>Experience Arc IAN features in action</p>
+                    
+                    <div class="card">
+                        <h3>🔗 Wallet Connection</h3>
+                        <p>Connected: <strong>0xd8da6bf...6c7e (Demo)</strong></p>
+                        <button class="btn" onclick="createShadowAccount()">Create Shadow Account</button>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>👥 Your Shadow Accounts</h3>
+                        <div id="accountsContainer">
+                            <p>No shadow accounts created yet</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>📊 Network Stats</h3>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; text-align: center;">
+                            <div>
+                                <h4>🎯 Active</h4>
+                                <p style="font-size: 1.5rem; font-weight: bold;" id="activeCount">0</p>
+                            </div>
+                            <div>
+                                <h4>💸 Total Limit</h4>
+                                <p style="font-size: 1.5rem; font-weight: bold;">0 USDC</p>
+                            </div>
+                            <div>
+                                <h4>🛡️ Privacy</h4>
+                                <p style="font-size: 1.5rem; font-weight: bold;">95%</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-secondary" onclick="location.reload()">← Back</button>
+                </div>
+            `;
+            document.querySelector('.main').innerHTML = demoHTML;
+        }
+
+        function showFeatures() {
+            const featuresHTML = `
+                <div class="dashboard">
+                    <h2>🚀 Arc IAN Features</h2>
+                    
+                    <div class="card">
+                        <h3>🕵️ Invisible Accounts</h3>
+                        <p>Temporary accounts that can't be linked to your main wallet</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>💸 Gas Sponsorship</h3>
+                        <p>Transactions are gasless - sponsored by the relayer network</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>👥 Shared Circles</h3>
+                        <p>Create private spending groups with custom limits</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>📊 Full Privacy Analytics</h3>
+                        <p>Monitor your privacy score and account rotation</p>
+                    </div>
+                    
+                    <button class="btn" onclick="showDemo()">Try Demo</button>
+                    <button class="btn btn-secondary" onclick="location.reload()">← Back</button>
+                </div>
+            `;
+            document.querySelector('.main').innerHTML = featuresHTML;
+        }
+
+        function createShadowAccount() {
+            const accounts = [
+                {
+                    id: 'shadow-' + Date.now(),
+                    address: '0x' + Math.random().toString(16).substr(2, 8) + '...' + Math.random().toString(16).substr(2, 4),
+                    limit: (Math.floor(Math.random() * 50) + 10) + ' USDC',
+                    status: 'Active'
+                }
+            ];
+            
+            let accountsHTML = '<div class="accounts-grid">';
+            accounts.forEach(acc => {
+                accountsHTML += `
+                    <div class="account-card">
+                        <h4>${acc.id}</h4>
+                        <p><strong>Address:</strong> ${acc.address}</p>
+                        <p><strong>Limit:</strong> ${acc.limit}</p>
+                        <p><strong>Status:</strong> ${acc.status}</p>
+                        <button class="btn" style="padding: 8px 16px; font-size: 0.9rem; margin-top: 0.5rem;" 
+                                onclick="sendTransaction('${acc.id}')">
+                            Send Transaction
+                        </button>
+                    </div>
+                `;
+            });
+            accountsHTML += '</div>';
+            
+            document.getElementById('accountsContainer').innerHTML = accountsHTML;
+            document.getElementById('activeCount').textContent = accounts.length;
+            
+            alert('✅ Shadow Account Created!\n\nThis account is now active for private transactions.');
+        }
+
+        function sendTransaction(accountId) {
+            alert(`🚀 Transaction initiated from ${accountId}\n\nThis would be a gasless, private transaction on Arc Network!`);
+        }
+    </script>
+</body>
+</html>
+
+echo "✅ Complete HTML website built in dist/index.html"
