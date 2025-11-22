@@ -1,4 +1,4 @@
-#Arc IAN — Next-Gen Modular Web Experience
+Arc IAN — Next-Gen Modular Web Experience
 
 Arc IAN is a modern, clean, fast web project built entirely with Vite + React, focused on modular design, smooth UI interactions, and a scalable architecture.
 This project has been created 100% using a mobile device without a laptop — proving that passion and consistency can build anything.
